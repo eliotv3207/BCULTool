@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Battle Cats 地底迷宮配置</title>
+    <link rel="stylesheet" href="lib/tippy.css" />
+    <link rel="stylesheet" href="main.css" /> 
+    <script src="lib/popper.min.js"></script>
+    <script src="lib/tippy-bundle.umd.min.js"></script>
+    <script src="main.js" defer></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="palette-section">
+        <!-- 關卡資訊 -->
+        <div id="stages-container" class="palette" ondragover="event.preventDefault()" ondrop="dropToStages(event)">
+          <img src="stages/001.jpg" draggable="true" class="stage" data-id="stage-00" title="地下1~9樓">
+          <img src="stages/002.jpg" draggable="true" class="stage" data-id="stage-01" title="地下1~9樓">
+          <img src="stages/003.jpg" draggable="true" class="stage" data-id="stage-02" title="地下1~9樓">
+          <img src="stages/004.jpg" draggable="true" class="stage" data-id="stage-03" title="地下1~9樓">
+          <img src="stages/005.jpg" draggable="true" class="stage" data-id="stage-04" title="地下1~9樓">
+          <img src="stages/006.jpg" draggable="true" class="stage" data-id="stage-05" title="地下1~9樓">
+          <img src="stages/007.jpg" draggable="true" class="stage" data-id="stage-06" title="地下1~9樓">
+          <img src="stages/008.jpg" draggable="true" class="stage" data-id="stage-07" title="地下1~9樓">
+          <img src="stages/009.jpg" draggable="true" class="stage" data-id="stage-08" title="地下1~9樓">
+          <img src="stages/091.jpg" draggable="true" class="stage" data-id="stage-90" title="地下10樓">
+          <img src="stages/092.jpg" draggable="true" class="stage" data-id="stage-91" title="地下10樓">
+          <img src="stages/093.jpg" draggable="true" class="stage" data-id="stage-92" title="地下10樓">
+          <img src="stages/094.jpg" draggable="true" class="stage" data-id="stage-93" title="地下10樓">
+          <img src="stages/010.jpg" draggable="true" class="stage" data-id="stage-09" title="地下11~19/21~29樓">
+          <img src="stages/011.jpg" draggable="true" class="stage" data-id="stage-10" title="地下11~19/21~29樓">
+          <img src="stages/012.jpg" draggable="true" class="stage" data-id="stage-11" title="地下11~19/21~29樓">
+          <img src="stages/013.jpg" draggable="true" class="stage" data-id="stage-12" title="地下11~19/21~29樓">
+          <img src="stages/014.jpg" draggable="true" class="stage" data-id="stage-13" title="地下11~19/21~29樓">
+          <img src="stages/015.jpg" draggable="true" class="stage" data-id="stage-14" title="地下11~19/21~29樓">
+          <img src="stages/016.jpg" draggable="true" class="stage" data-id="stage-15" title="地下11~19/21~29樓">
+          <img src="stages/017.jpg" draggable="true" class="stage" data-id="stage-16" title="地下11~19/21~29樓">
+          <img src="stages/018.jpg" draggable="true" class="stage" data-id="stage-17" title="地下11~19/21~29樓">
+          <img src="stages/019.jpg" draggable="true" class="stage" data-id="stage-18" title="地下11~19/21~29樓">
+          <img src="stages/020.jpg" draggable="true" class="stage" data-id="stage-19" title="地下11~19/21~29樓">
+          <img src="stages/021.jpg" draggable="true" class="stage" data-id="stage-20" title="地下11~19/21~29樓">
+          <img src="stages/022.jpg" draggable="true" class="stage" data-id="stage-21" title="地下11~19/21~29樓">
+          <img src="stages/023.jpg" draggable="true" class="stage" data-id="stage-22" title="地下11~19/21~29樓">
+          <img src="stages/024.jpg" draggable="true" class="stage" data-id="stage-23" title="地下11~19/21~29樓">
+          <img src="stages/025.jpg" draggable="true" class="stage" data-id="stage-24" title="地下11~19/21~29樓">
+          <img src="stages/026.jpg" draggable="true" class="stage" data-id="stage-25" title="地下11~19/21~29樓">
+          <img src="stages/027.jpg" draggable="true" class="stage" data-id="stage-26" title="地下11~19/21~29樓">
+          <img src="stages/095.jpg" draggable="true" class="stage" data-id="stage-94" title="地下20/30樓">
+          <img src="stages/096.jpg" draggable="true" class="stage" data-id="stage-95" title="地下20/30樓">
+          <img src="stages/097.jpg" draggable="true" class="stage" data-id="stage-96" title="地下20/30樓">
+          <img src="stages/098.jpg" draggable="true" class="stage" data-id="stage-97" title="地下20/30樓">
+          <img src="stages/028.jpg" draggable="true" class="stage" data-id="stage-27" title="地下31~39/41~49/51~59樓">
+          <img src="stages/029.jpg" draggable="true" class="stage" data-id="stage-28" title="地下31~39/41~49/51~59樓">
+          <img src="stages/030.jpg" draggable="true" class="stage" data-id="stage-29" title="地下31~39/41~49/51~59樓">
+          <img src="stages/031.jpg" draggable="true" class="stage" data-id="stage-30" title="地下31~39/41~49/51~59樓">
+          <img src="stages/032.jpg" draggable="true" class="stage" data-id="stage-31" title="地下31~39/41~49/51~59樓">
+          <img src="stages/033.jpg" draggable="true" class="stage" data-id="stage-32" title="地下31~39/41~49/51~59樓">
+          <img src="stages/034.jpg" draggable="true" class="stage" data-id="stage-33" title="地下31~39/41~49/51~59樓">
+          <img src="stages/035.jpg" draggable="true" class="stage" data-id="stage-34" title="地下31~39/41~49/51~59樓">
+          <img src="stages/036.jpg" draggable="true" class="stage" data-id="stage-35" title="地下31~39/41~49/51~59樓">
+          <img src="stages/037.jpg" draggable="true" class="stage" data-id="stage-36" title="地下31~39/41~49/51~59樓">
+          <img src="stages/038.jpg" draggable="true" class="stage" data-id="stage-37" title="地下31~39/41~49/51~59樓">
+          <img src="stages/039.jpg" draggable="true" class="stage" data-id="stage-38" title="地下31~39/41~49/51~59樓">
+          <img src="stages/040.jpg" draggable="true" class="stage" data-id="stage-39" title="地下31~39/41~49/51~59樓">
+          <img src="stages/041.jpg" draggable="true" class="stage" data-id="stage-40" title="地下31~39/41~49/51~59樓">
+          <img src="stages/042.jpg" draggable="true" class="stage" data-id="stage-41" title="地下31~39/41~49/51~59樓">
+          <img src="stages/043.jpg" draggable="true" class="stage" data-id="stage-42" title="地下31~39/41~49/51~59樓">
+          <img src="stages/044.jpg" draggable="true" class="stage" data-id="stage-43" title="地下31~39/41~49/51~59樓">
+          <img src="stages/045.jpg" draggable="true" class="stage" data-id="stage-44" title="地下31~39/41~49/51~59樓">
+          <img src="stages/046.jpg" draggable="true" class="stage" data-id="stage-45" title="地下31~39/41~49/51~59樓">
+          <img src="stages/047.jpg" draggable="true" class="stage" data-id="stage-46" title="地下31~39/41~49/51~59樓">
+          <img src="stages/048.jpg" draggable="true" class="stage" data-id="stage-47" title="地下31~39/41~49/51~59樓">
+          <img src="stages/049.jpg" draggable="true" class="stage" data-id="stage-48" title="地下31~39/41~49/51~59樓">
+          <img src="stages/050.jpg" draggable="true" class="stage" data-id="stage-49" title="地下31~39/41~49/51~59樓">
+          <img src="stages/051.jpg" draggable="true" class="stage" data-id="stage-50" title="地下31~39/41~49/51~59樓">
+          <img src="stages/052.jpg" draggable="true" class="stage" data-id="stage-51" title="地下31~39/41~49/51~59樓">
+          <img src="stages/053.jpg" draggable="true" class="stage" data-id="stage-52" title="地下31~39/41~49/51~59樓">
+          <img src="stages/054.jpg" draggable="true" class="stage" data-id="stage-53" title="地下31~39/41~49/51~59樓">
+          <img src="stages/099.jpg" draggable="true" class="stage" data-id="stage-98" title="地下40/50/60樓">
+          <img src="stages/100.jpg" draggable="true" class="stage" data-id="stage-99" title="地下40/50/60樓">
+          <img src="stages/101.jpg" draggable="true" class="stage" data-id="stage-100" title="地下40/50/60樓">
+          <img src="stages/102.jpg" draggable="true" class="stage" data-id="stage-101" title="地下40/50/60樓">
+          <img src="stages/103.jpg" draggable="true" class="stage" data-id="stage-102" title="地下40/50/60樓">
+          <img src="stages/104.jpg" draggable="true" class="stage" data-id="stage-103" title="地下40/50/60樓">
+          <img src="stages/055.jpg" draggable="true" class="stage" data-id="stage-54" title="地下61~69/71~79/81~89/91~98樓">
+          <img src="stages/056.jpg" draggable="true" class="stage" data-id="stage-55" title="地下61~69/71~79/81~89/91~98樓">
+          <img src="stages/057.jpg" draggable="true" class="stage" data-id="stage-56" title="地下61~69/71~79/81~89/91~98樓">
+          <img src="stages/058.jpg" draggable="true" class="stage" data-id="stage-57" title="地下61~69/71~79/81~89/91~98樓">
+          <img src="stages/059.jpg" draggable="true" class="stage" data-id="stage-58" title="地下61~69/71~79/81~89/91~98樓">
+          <img src="stages/060.jpg" draggable="true" class="stage" data-id="stage-59" title="地下61~69/71~79/81~89/91~98樓">
+          <img src="stages/061.jpg" draggable="true" class="stage" data-id="stage-60" title="地下61~69/71~79/81~89/91~98樓">
+          <img src="stages/062.jpg" draggable="true" class="stage" data-id="stage-61" title="地下61~69/71~79/81~89/91~98樓">
+          <img src="stages/063.jpg" draggable="true" class="stage" data-id="stage-62" title="地下61~69/71~79/81~89/91~98樓">
+          <img src="stages/064.jpg" draggable="true" class="stage" data-id="stage-63" title="地下61~69/71~79/81~89/91~98樓">
+          <img src="stages/065.jpg" draggable="true" class="stage" data-id="stage-64" title="地下61~69/71~79/81~89/91~98樓">
+          <img src="stages/066.jpg" draggable="true" class="stage" data-id="stage-65" title="地下61~69/71~79/81~89/91~98樓">
+          <img src="stages/067.jpg" draggable="true" class="stage" data-id="stage-66" title="地下61~69/71~79/81~89/91~98樓">
+          <img src="stages/068.jpg" draggable="true" class="stage" data-id="stage-67" title="地下61~69/71~79/81~89/91~98樓">
+          <img src="stages/069.jpg" draggable="true" class="stage" data-id="stage-68" title="地下61~69/71~79/81~89/91~98樓">
+          <img src="stages/070.jpg" draggable="true" class="stage" data-id="stage-69" title="地下61~69/71~79/81~89/91~98樓">
+          <img src="stages/071.jpg" draggable="true" class="stage" data-id="stage-70" title="地下61~69/71~79/81~89/91~98樓">
+          <img src="stages/072.jpg" draggable="true" class="stage" data-id="stage-71" title="地下61~69/71~79/81~89/91~98樓">
+          <img src="stages/073.jpg" draggable="true" class="stage" data-id="stage-72" title="地下61~69/71~79/81~89/91~98樓">
+          <img src="stages/074.jpg" draggable="true" class="stage" data-id="stage-73" title="地下61~69/71~79/81~89/91~98樓">
+          <img src="stages/075.jpg" draggable="true" class="stage" data-id="stage-74" title="地下61~69/71~79/81~89/91~98樓">
+          <img src="stages/076.jpg" draggable="true" class="stage" data-id="stage-75" title="地下61~69/71~79/81~89/91~98樓">
+          <img src="stages/077.jpg" draggable="true" class="stage" data-id="stage-76" title="地下61~69/71~79/81~89/91~98樓">
+          <img src="stages/078.jpg" draggable="true" class="stage" data-id="stage-77" title="地下61~69/71~79/81~89/91~98樓">
+          <img src="stages/079.jpg" draggable="true" class="stage" data-id="stage-78" title="地下61~69/71~79/81~89/91~98樓">
+          <img src="stages/080.jpg" draggable="true" class="stage" data-id="stage-79" title="地下61~69/71~79/81~89/91~98樓">
+          <img src="stages/081.jpg" draggable="true" class="stage" data-id="stage-80" title="地下61~69/71~79/81~89/91~98樓">
+          <img src="stages/082.jpg" draggable="true" class="stage" data-id="stage-81" title="地下61~69/71~79/81~89/91~98樓">
+          <img src="stages/083.jpg" draggable="true" class="stage" data-id="stage-82" title="地下61~69/71~79/81~89/91~98樓">
+          <img src="stages/084.jpg" draggable="true" class="stage" data-id="stage-83" title="地下61~69/71~79/81~89/91~98樓">
+          <img src="stages/085.jpg" draggable="true" class="stage" data-id="stage-84" title="地下61~69/71~79/81~89/91~98樓">
+          <img src="stages/086.jpg" draggable="true" class="stage" data-id="stage-85" title="地下61~69/71~79/81~89/91~98樓">
+          <img src="stages/087.jpg" draggable="true" class="stage" data-id="stage-86" title="地下61~69/71~79/81~89/91~98樓">
+          <img src="stages/088.jpg" draggable="true" class="stage" data-id="stage-87" title="地下61~69/71~79/81~89/91~98樓">
+          <img src="stages/089.jpg" draggable="true" class="stage" data-id="stage-88" title="地下61~69/71~79/81~89/91~98樓">
+          <img src="stages/090.jpg" draggable="true" class="stage" data-id="stage-89" title="地下61~69/71~79/81~89/91~98樓">
+          <img src="stages/105.jpg" draggable="true" class="stage" data-id="stage-104" title="地下70/80/90/99樓">
+          <img src="stages/106.jpg" draggable="true" class="stage" data-id="stage-105" title="地下70/80/90/99樓">
+          <img src="stages/107.jpg" draggable="true" class="stage" data-id="stage-106" title="地下70/80/90/99樓">
+          <img src="stages/108.jpg" draggable="true" class="stage" data-id="stage-107" title="地下70/80/90/99樓">
+          <img src="stages/109.jpg" draggable="true" class="stage" data-id="stage-108" title="地下70/80/90/99樓">
+          <img src="stages/110.jpg" draggable="true" class="stage" data-id="stage-109" title="地下70/80/90/99樓">
+          <img src="stages/111.jpg" draggable="true" class="stage" data-id="stage-110" title="地下70/80/90/99樓">
+          <img src="stages/112.jpg" draggable="true" class="stage" data-id="stage-111" title="地下70/80/90/99樓">
+          <img id="stage100" src="stages/113.jpg" draggable="true" class="stage" data-id="stage-112" title="地下100樓">
+        </div>
+        <!-- 可用貓咪 -->
+        <div id="available-units-container" class="palette unit-block" ondragover="event.preventDefault()" ondrop="dropToTabs(event)">
+          <div class="tabs" >
+            <div class="tab-buttons">
+              <button class="tab-btn" data-tab="0">基本(0)</button>
+              <button class="tab-btn" data-tab="1">EX(0)</button>
+              <button class="tab-btn" data-tab="2">稀有(0)</button>
+              <button class="tab-btn" data-tab="3">激稀有(0)</button>
+              <button class="tab-btn active" data-tab="4">超激稀有(0)</button>
+              <button class="tab-btn" data-tab="5">傳說稀有(0)</button>
+            </div>
+            <div class="tab-stats">可用：<label class="total">0</label></div>
+          </div>
+          <div class="tab-contents-wrapper">
+            <div class="tab-content" data-tab="0"></div>
+            <div class="tab-content" data-tab="1"></div>          
+            <div class="tab-content" data-tab="2"></div>
+            <div class="tab-content" data-tab="3"></div>
+            <div class="tab-content active" data-tab="4"></div>
+            <div class="tab-content" data-tab="5"></div>
+          </div>
+        </div>
+        <!-- 禁用貓咪 -->
+        <div id="disable-units-container" class="palette unit-block" ondragover="event.preventDefault()" ondrop="dropToTabs(event)">
+          <div class="tabs" >
+            <div class="tab-buttons">
+              <button class="tab-btn" data-tab="0">基本(0)</button>
+              <button class="tab-btn" data-tab="1">EX(0)</button>
+              <button class="tab-btn" data-tab="2">稀有(0)</button>
+              <button class="tab-btn" data-tab="3">激稀有(0)</button>
+              <button class="tab-btn active" data-tab="4">超激稀有(0)</button>
+              <button class="tab-btn" data-tab="5">傳說稀有(0)</button>
+            </div>
+            <div class="tab-stats">禁用：<label class="total">0</label></div>
+          </div>
+          <div class="tab-contents-wrapper">
+            <div class="tab-content" data-tab="0"></div>
+            <div class="tab-content" data-tab="1"></div>          
+            <div class="tab-content" data-tab="2"></div>
+            <div class="tab-content" data-tab="3"></div>
+            <div class="tab-content active" data-tab="4"></div>
+            <div class="tab-content" data-tab="5"></div>
+          </div>
+        </div>
+      </div>
+      <div class="canvas-wrapper" id="canvas-wrapper"></div>
+      <div class="tool-panel">
+        <div class="tool-buttons">
+          <div class="tool-group">
+            <button class="custom-btn" onclick="addCanvas()">新增</button>
+            <button class="custom-btn" onclick="exportState()">匯出</button>
+            <label for="importFile" class="custom-btn">匯入</label>
+            <input type="file" id="importFile" accept=".json" style="display:none;" />
+          </div>
+          <div class="tool-group">
+            <button id="toggleMultiSelectBtn" class="toggle-btn">多選：關</button>
+          </div>
+          <div class="tool-group">
+            <input id="search-box" type="text" placeholder="搜尋貓咪..."/>
+            <label id="search-results-length"></label>
+          </div>
+          <div class="tool-group">
+            <button id="search-btn" class="custom-btn" onclick="searchUnits()">搜尋</button>
+            <button class="custom-btn" onclick="prev()"><</button>
+            <label id="search-results"></label>
+            <button class="custom-btn" onclick="next()">></button>
+            <button title="加入配置" class="custom-btn"onclick="add()">+</button>
+          </div>
+          <div class="tool-group">
+            <button title="查詢" class="custom-btn" onclick="query()">Q</button>
+            <button title="切換型態" class="custom-btn" onclick="switchForm()">S</button>
+            <div class="custom-select-wrapper">
+              <select id="unit-Scope" class="custom-select">
+                <option value="">全部</option>
+                <option value="available">可用</option>
+                <option value="deploy">配置</option>
+                <option value="disabled">禁用</option>
+              </select>
+            </div>
+            <button id="logicToggle" class="toggle-btn" onclick="toggleLogic()">OR</button>
+            <button class="custom-btn" onclick="clearFilters()">清除</button>
+          </div>
+        </div>
+        <div class="filters-group rarity-group">
+          <button class="filter-btn" data-rarity="0">基本</button>
+          <button class="filter-btn" data-rarity="1">EX</button>
+          <button class="filter-btn" data-rarity="2">稀有</button>
+          <button class="filter-btn" data-rarity="3">激稀有</button>
+          <button class="filter-btn" data-rarity="4">超激稀有</button>
+          <button class="filter-btn" data-rarity="5">傳說稀有</button>
+        </div>
+        <div class="filters-group traits-group">
+          <button class="icon-btn trait-red"        title="紅色敵人"      data-trait="TB_RED"></button>
+          <button class="icon-btn trait-float"      title="飄浮敵人"      data-trait="TB_FLOAT"></button>
+          <button class="icon-btn trait-black"      title="黑色敵人"      data-trait="TB_BLACK"></button>
+          <button class="icon-btn trait-metal"      title="鋼鐵敵人"      data-trait="TB_METAL"></button>
+          <button class="icon-btn trait-angel"      title="天使敵人"      data-trait="TB_ANGEL"></button>
+          <button class="icon-btn trait-alien"      title="異星戰士"      data-trait="TB_ALIEN"></button>
+          <button class="icon-btn trait-zombie"     title="不死生物"      data-trait="TB_ZOMBIE"></button>
+          <button class="icon-btn trait-relic"      title="古代種"        data-trait="TB_RELIC"></button>
+          <button class="icon-btn trait-traitless"  title="無屬性敵人"    data-trait="TB_WHITE"></button>
+          <button class="icon-btn trait-aku"        title="惡魔"          data-trait="TB_DEMON"></button>
+        </div>
+        <div class="filters-group effects-group">
+          <button class="icon-btn effect-weaken"         title="攻擊力下降"     data-effect="AB_WEAK"></button>
+          <button class="icon-btn effect-freeze"         title="使動作停止"     data-effect="AB_STOP"></button>
+          <button class="icon-btn effect-slow"           title="使動作變慢"     data-effect="AB_SLOW"></button>
+          <button class="icon-btn effect-attacks-only"   title="只能攻擊"       data-effect="AB_ONLY"></button>
+          <button class="icon-btn effect-strong-against" title="善於攻擊"       data-effect="AB_GOOD"></button>
+          <button class="icon-btn effect-resistant"      title="很耐打"         data-effect="AB_RESIST"></button>
+          <button class="icon-btn effect-insanely-tough" title="超級耐打"       data-effect="AB_RESISTS"></button>
+          <button class="icon-btn effect-massive-damage" title="超大傷害"       data-effect="AB_MASSIVE"></button>
+          <button class="icon-btn effect-insane-damage"  title="極度傷害"       data-effect="AB_MASSIVES"></button>
+          <button class="icon-btn effect-knockback"      title="打飛敵人"       data-effect="AB_KB"></button>
+          <button class="icon-btn effect-warp"           title="傳送"           data-effect="AB_WARP"></button>
+          <button class="icon-btn effect-curse"          title="詛咒"           data-effect="AB_CURSE"></button>
+          <button class="icon-btn effect-dodge-attack"   title="攻擊無效"       data-effect="AB_IMUATK"></button>
+        </div>
+        <div class="filters-group abilities-group">
+          <button class="icon-btn ability-strengthen"         title="攻擊力上升"         data-ability="AB_STRENGTHEN"></button>
+          <button class="icon-btn ability-survive"            title="死前存活"           data-ability="AB_LETHAL"></button>
+          <button class="icon-btn ability-base-destroyer"     title="善於攻城"           data-ability="AB_ATKBASE"></button>
+          <button class="icon-btn ability-critical"           title="會心一擊"           data-ability="AB_CRIT"></button>
+          <button class="icon-btn ability-zombie-killer"      title="終結不死"           data-ability="AB_ZKILL"></button>
+          <button class="icon-btn ability-soulstrike"         title="靈魂攻擊"           data-ability="AB_CKILL"></button>
+          <button class="icon-btn ability-barrier-breaker"    title="破壞護盾"           data-ability="AB_BREAK"></button>
+          <button class="icon-btn ability-shield-piercing"    title="破壞惡魔盾"         data-ability="AB_SHIELDBREAK"></button>
+          <button class="icon-btn ability-savage-blow"        title="渾身一擊"           data-ability="AB_S"></button>
+          <button class="icon-btn ability-extra-money"        title="得到很多金錢"       data-ability="AB_BOUNTY"></button>
+          <button class="icon-btn ability-metal"              title="鋼鐵特性"           data-ability="AB_METALIC"></button>
+          <button class="icon-btn ability-mini-wave"          title="小波動"             data-ability="AB_MINIWAVE"></button>
+          <button class="icon-btn ability-wave"               title="波動"               data-ability="AB_WAVE"></button>
+          <button class="icon-btn ability-mini-surge"         title="小烈波"             data-ability="AB_MINISURGE"></button>
+          <button class="icon-btn ability-surge"              title="烈波攻擊"           data-ability="AB_SURGE"></button>
+          <button class="icon-btn ability-wave-shield"        title="波動滅止"           data-ability="AB_WAVES"></button>
+          <button class="icon-btn ability-colossus-slayer"    title="超生命體特效"       data-ability="AB_BAIL"></button>
+          <button class="icon-btn ability-behemoth-slayer"    title="超獸特效"           data-ability="AB_BSTHUNT"></button>
+          <button class="icon-btn ability-witch-killer"       title="終結魔女"           data-ability="AB_WKILL"></button>
+          <button class="icon-btn ability-eva-angel-killer"   title="終結使徒"           data-ability="AB_EKILL"></button>
+          <button class="icon-btn ability-burrow"             title="鑽地"               data-ability="AB_BURROW"></button>
+          <button class="icon-btn ability-revive"             title="復活"               data-ability="AB_REVIVE"></button>
+          <button class="icon-btn ability-toxic"              title="毒擊"               data-ability="AB_POIATK"></button>
+          <button class="icon-btn ability-kamikaze"           title="一次攻擊"           data-ability="AB_SUICIDE"></button>
+          <button class="icon-btn ability-barrier"            title="護盾"               data-ability="AB_BARRIER"></button>
+          <button class="icon-btn ability-shield"             title="惡魔盾"             data-ability="AB_DSHIELD"></button>
+          <button class="icon-btn ability-counter-surge"      title="烈波反擊"           data-ability="AB_COUNTER"></button>
+          <button class="icon-btn ability-death-surge"        title="遺留烈波"           data-ability="AB_DEATHSURGE"></button>
+          <button class="icon-btn ability-sage-slayer"        title="超賢者特效"         data-ability="AB_SAGE"></button>
+          <button class="icon-btn ability-conjure"            title="召喚"               data-ability="AB_SUMMON"></button>
+          <button class="icon-btn ability-metal-killer"       title="鋼鐵殺手"           data-ability="AB_MK"></button>
+          <button class="icon-btn ability-explosion"          title="爆波"               data-ability="AB_EXPLOSION"></button>
+        </div>
+        <div class="filters-group attack-types-group">
+          <button class="icon-btn attack-single"        title="單體攻擊"        data-attack="ATK_SINGLE"></button>
+          <button class="icon-btn attack-area"          title="範圍攻擊"        data-attack="ATK_RANGE"></button>
+          <button class="icon-btn attack-long-distance" title="遠距攻擊"        data-attack="ATK_LD"></button>
+          <button class="icon-btn attack-omni"          title="全方位攻擊"      data-attack="ATK_OMNI"></button>
+          <button class="icon-btn attack-kb-revenge"    title="擊退反擊"        data-attack="ATK_KB_REVENGE"></button>
+        </div>
+        <div class="filters-group immunities-group">
+          <button class="icon-btn immunity-wave"        title="波動傷害無效"     data-immunity="IMU_WAVE"></button>
+          <button class="icon-btn immunity-stop"        title="動作停止無效"     data-immunity="IMU_STOP"></button>
+          <button class="icon-btn immunity-slow"        title="動作變慢無效"     data-immunity="IMU_SLOW"></button>
+          <button class="icon-btn immunity-kb"          title="打飛敵人無效"     data-immunity="IMU_KB"></button>
+          <button class="icon-btn immunity-surge"       title="烈波傷害無效"     data-immunity="IMU_SURGE"></button>
+          <button class="icon-btn immunity-weaken"      title="攻擊力下降無效"   data-immunity="IMU_WEAK"></button>
+          <button class="icon-btn immunity-warp"        title="傳送無效"         data-immunity="IMU_WARP"></button>
+          <button class="icon-btn immunity-curse"       title="古代詛咒無效"     data-immunity="IMU_CURSE"></button>
+          <button class="icon-btn immunity-toxic"       title="毒擊傷害無效"     data-immunity="IMU_TOXIC"></button>
+          <button class="icon-btn immunity-bosswave"    title="魔王震波無效"     data-immunity="IMU_BOSSWAVE"></button>
+          <button class="icon-btn immunity-explosion"   title="爆波傷害無效"     data-immunity="IMU_EXPLOSION"></button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+      

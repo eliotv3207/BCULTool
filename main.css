@@ -1,0 +1,414 @@
+body {
+  font-family: sans-serif;
+  background: #f5f5f5;
+  margin: 0;
+  padding: 10px;
+}
+
+.container {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  flex-wrap: nowrap; /* 避免多欄自動換行 */
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.palette-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 45%;
+}
+
+.palette {
+  border: 2px dashed #ccc;
+  padding: 5px;
+  background: white;
+  min-height: 29vh;
+  max-height: 29vh;
+  overflow-y: auto;
+}
+
+#stages-container {
+   display: flex;
+   flex-direction: column;
+   gap: 1px;
+}
+
+.canvas-wrapper {
+  width: 36%;
+  max-height: 91vh;
+  min-height: 91vh;
+  overflow-y: auto;
+  background: white;
+  border: 2px dashed #ccc;
+  padding: 10px;
+}
+
+.canvas {
+  position: relative;
+  display: inline-block;
+  min-width: 95%;
+  border: 1px solid #999;
+  padding: 10px;
+  margin-bottom: 10px;
+  background: #fffefc;
+  min-height: 120px;
+}
+
+.canvas.selected {
+  border-color: #007bff; /* 藍色邊框 */
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.3); /* 外圍亮光感 */
+}
+
+.stage {
+  width: auto;
+  max-height: 130px;
+  align-self: flex-end;
+  cursor: grab;
+  user-select: none;
+  display: block;
+}
+
+#stage100 {
+  width: auto;
+  max-height: 390px;
+}
+
+.unit-block {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.unit-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  max-width: 360px;
+}
+
+.unit {
+  width: 52px;
+  height: 38px;
+  margin: 5px;
+  cursor: grab;
+  user-select: none;
+}
+
+.unit.selected {
+  outline: 3px solid #00BFFF;
+  outline-offset: -2px; /* 貼近邊緣 */
+  box-shadow: 0 0 4px 1px rgba(0, 191, 255, 0.8)
+}
+
+.unit.highlight {
+  box-shadow: 0 0 6px 2px rgba(0, 191, 255, 0.9);
+  animation: glowBlink 1s ease-in-out;
+}
+
+@keyframes glowBlink {
+  0% { box-shadow: 0 0 6px 2px rgba(0, 191, 255, 0.9); }
+  50% { box-shadow: 0 0 12px 4px rgba(0, 191, 255, 1); }
+  100% { box-shadow: 0 0 6px 2px rgba(0, 191, 255, 0.9); }
+}
+
+.tabs {
+  position: sticky;
+  top: 0;
+  background-color: white; /* 或其他背景色，避免滾動時透明 */
+  z-index: 10;
+  padding: 0.5em;
+  border-bottom: 1px solid #ccc;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.tab-buttons {
+  display: flex;
+  gap: 5px;
+}
+
+.tab-btn {
+  padding: 5px 10px;
+  background: #ddd;
+  border: none;
+  cursor: pointer;
+}
+
+.tab-btn.active {
+  background: #999;
+  color: white;
+}
+
+.tab-contents-wrapper {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.tab-stats {
+  font-size: 0.9em;
+  color: #333;
+}
+
+.tool-panel {
+  width: 17%;
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+  background: #fff;
+  padding: 10px;
+  border: 2px dashed #ccc;
+  max-height: 96vh;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+.custom-btn {
+  display: inline-block;
+  padding: 4px 8px;
+  font-size: 15px;
+  line-height: 1.2;  /* 控制行高 */
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+  width: auto;
+  align-self: start;
+}
+
+.custom-btn:hover{
+  background-color: #45a049;
+}
+
+#search-box {
+  padding: 6px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  max-width: 100px;
+}
+
+/* 工具按鈕組 */
+.tool-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  align-items: center;
+}
+
+.tool-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.filters-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0px; /* 控制圖示間距 */
+  max-width: 290px; /* 控制最多一行幾個，可依需求調整 */
+}
+
+.icon-btn {
+  width: 33px;
+  height: 33px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  border: 2px solid transparent;
+  filter: grayscale(30%) brightness(60%);
+  transition: filter 0.3s ease;
+}
+
+.icon-btn.selected {
+  filter: none; 
+}
+
+.toggle-btn {
+  padding: 4px 8px;
+  background-color: #444;
+  color: white;
+  border: 1px solid #888;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.filter-btn {
+  background-color: #222;
+  color: #ccc;
+  font-size: 16px;
+  border-radius: 4px;
+  border: 2px solid transparent;
+  display: inline-block;
+  white-space: nowrap;  /* 不換行 */
+  padding: 2px 6px;  /* 控制上下左右邊距 */
+  line-height: 1;  /* 減少行高空間 */
+  margin: 1px;
+  cursor: pointer;
+  user-select: none;
+  transition: 0.2s;
+}
+
+.filter-btn:hover {
+  border-color: #666;
+}
+
+.filter-btn.selected {
+  background-color: #E07B39; /* 橘底 */
+  color: white;  /* 白字 */
+  border-color: #C75B1A;
+}
+
+/* 外層容器讓select可以有陰影跟圓角 */
+.custom-select-wrapper {
+  display: inline-block;
+  position: relative;
+  width: 50px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* 基本select外觀重置 */
+.custom-select {
+  text-align: center;
+  width: 100%;
+  padding: 2px 2px 2px 2px;
+  border: 2px solid #43a047;  /* 綠色邊框 */
+  border-radius: 6px;
+  background-color: #fff;
+  color: #333;
+  font-size: 16px;
+  appearance: none;  /* 移除系統預設箭頭 */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+}
+
+/* 選中或 focus 時的邊框變化 */
+.custom-select:focus {
+  outline: none;
+  border-color: #43a047; /* 綠色 */
+  box-shadow: 0 0 5px rgba(67, 160, 71, 0.5);
+}
+
+.tippy-box[data-theme~='my-light'] {
+  background: #f9f9f9;
+  color: #333;
+  border: 1px solid #aaa;
+  font-family: "Noto Sans TC", sans-serif;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.tooltip-content div {
+  display: flex;
+  align-items: center;  /* 垂直置中 */
+  justify-content: center;  /* 水平置中 */
+  gap: 0.1em;  /*圖文間距 */
+}
+
+.arrow { background-image: url('icons/right.png'); }
+
+.icon {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  cursor: help;
+  margin: 1px;
+  vertical-align: middle;
+  background-position: center;
+}
+
+.trait-red { background-image: url('icons/red.png'); }
+.trait-float { background-image: url('icons/float.png'); }
+.trait-black { background-image: url('icons/black.png'); }
+.trait-metal { background-image: url('icons/trait-metal.png'); }
+.trait-angel { background-image: url('icons/angel.png'); }
+.trait-alien { background-image: url('icons/alien.png'); }
+.trait-zombie { background-image: url('icons/zombie.png'); }
+.trait-relic { background-image: url('icons/relic.png'); }
+.trait-traitless { background-image: url('icons/traitless.png'); }
+.trait-aku { background-image: url('icons/aku.png'); }
+
+.effect-weaken  { background-image: url('icons/weaken.png'); }
+.effect-freeze  { background-image: url('icons/freeze.png'); }
+.effect-slow  { background-image: url('icons/slow.png'); }
+.effect-attacks-only  { background-image: url('icons/attacks-only.png'); }
+.effect-strong-against  { background-image: url('icons/strong-against.png'); }
+.effect-resistant  { background-image: url('icons/resistant.png'); }
+.effect-insanely-tough  { background-image: url('icons/insanely-tough.png'); }
+.effect-massive-damage  { background-image: url('icons/massive-damage.png'); }
+.effect-insane-damage  { background-image: url('icons/insane-damage.png'); }
+.effect-knockback  { background-image: url('icons/knockback.png'); }
+.effect-warp  { background-image: url('icons/warp.png'); }
+.effect-dodge-attack  { background-image: url('icons/dodge-attack.png'); }
+.effect-curse  { background-image: url('icons/curse.png'); }
+
+.attack-single { background-image: url('icons/single.png'); }
+.attack-area { background-image: url('icons/area.png'); }
+.attack-long-distance { background-image: url('icons/long-distance.png'); }
+.attack-omni { background-image: url('icons/omni.png'); }
+.attack-kb-revenge { background-image: url('icons/attack-kb-revenge.png'); }
+
+.ability-strengthen  { background-image: url('icons/strengthen.png'); }
+.ability-survive  { background-image: url('icons/survive.png'); }
+.ability-base-destroyer  { background-image: url('icons/base-destroyer.png'); }
+.ability-critical  { background-image: url('icons/critical.png'); }
+.ability-zombie-killer  { background-image: url('icons/zombie-killer.png'); }
+.ability-soulstrike  { background-image: url('icons/soulstrike.png'); }
+.ability-barrier-breaker { background-image: url('icons/barrier-breaker.png'); }
+.ability-shield-piercing { background-image: url('icons/shield-piercing.png'); }
+.ability-savage-blow  { background-image: url('icons/savage-blow.png'); }
+.ability-extra-money  { background-image: url('icons/extra-money.png'); }
+.ability-metal  { background-image: url('icons/metal.png'); }
+.ability-mini-wave  { background-image: url('icons/mini-wave.png'); }
+.ability-wave  { background-image: url('icons/wave.png'); }
+.ability-mini-surge  { background-image: url('icons/mini-surge.png'); }
+.ability-surge  { background-image: url('icons/surge.png'); }
+.ability-wave-shield  { background-image: url('icons/wave-shield.png'); }
+.ability-colossus-slayer { background-image: url('icons/colossus-slayer.png'); }
+.ability-behemoth-slayer { background-image: url('icons/behemoth-slayer.png'); }
+.ability-witch-killer  { background-image: url('icons/witch-killer.png'); }
+.ability-eva-angel-killer{ background-image: url('icons/eva-angel-killer.png'); }
+.ability-burrow  { background-image: url('icons/burrow.png'); }
+.ability-revive  { background-image: url('icons/revive.png'); }
+.ability-toxic  { background-image: url('icons/toxic.png'); }
+.ability-kamikaze  { background-image: url('icons/kamikaze.png'); }
+.ability-barrier  { background-image: url('icons/barrier.png'); }
+.ability-shield  { background-image: url('icons/shield.png'); }
+.ability-counter-surge  { background-image: url('icons/counter-surge.png'); }
+.ability-death-surge  { background-image: url('icons/death-surge.png'); }
+.ability-sage-slayer  { background-image: url('icons/sage-slayer.png'); }
+.ability-conjure  { background-image: url('icons/conjure.png'); }
+.ability-metal-killer  { background-image: url('icons/metal-killer.png'); }
+.ability-explosion  { background-image: url('icons/explosion.png'); }
+
+.immunity-wave  { background-image: url('icons/immune-to-waves.png'); }
+.immunity-stop  { background-image: url('icons/immune-to-freeze.png'); }
+.immunity-slow  { background-image: url('icons/immune-to-slow.png'); }
+.immunity-kb  { background-image: url('icons/immune-to-knockback.png'); }
+.immunity-surge  { background-image: url('icons/immune-to-surge.png'); }
+.immunity-weaken  { background-image: url('icons/immune-to-weaken.png'); }
+.immunity-warp  { background-image: url('icons/immune-to-warp.png'); }
+.immunity-curse  { background-image: url('icons/immune-to-curse.png'); }
+.immunity-toxic  { background-image: url('icons/immune-to-toxic.png'); }
+.immunity-bosswave  { background-image: url('icons/immune-to-boss-shockwave.png'); }
+.immunity-explosion  { background-image: url('icons/immune-to-explosions.png'); }

@@ -1217,6 +1217,8 @@ function add() {
   const container = document.querySelector('.canvas.selected .unit-group');
   if (img && container) {
     container.appendChild(img);
+    img._tippy.hide();
+    saveState();
   }
 }
 

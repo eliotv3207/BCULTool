@@ -1218,6 +1218,7 @@ function add() {
   if (img && container) {
     container.appendChild(img);
     img._tippy.hide();
+    updateTabCounts();
     saveState();
   }
 }

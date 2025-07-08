@@ -630,7 +630,6 @@ function dropToCanvas(event) {
     else if (draggedElement.classList.contains('stage')) {
       // 拖入的是 stage，直接放到 canvas-block (也就是 canvas 自己)
       canvas.insertBefore(draggedElement, canvas.firstChild);
-      //canvas.appendChild(draggedElement);
     }
     updateTabCounts();
     saveState();
@@ -766,6 +765,7 @@ function getDelBtn (wrapper, canvas) {
         const palette = getPaletteByImg(img);
         if (palette) palette.appendChild(img);
       });
+      wrapper.removeChild(canvas);
       updateTabCounts();
       saveState();
     }

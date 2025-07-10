@@ -378,11 +378,20 @@ function generateTooltipContent(unit) {
 }
 
 let isMultiSelectMode = false;
-const btn = document.getElementById("toggleMultiSelectBtn");
-btn.addEventListener("click", () => {
+document.getElementById("toggleMultiSelectBtn").addEventListener("click", e => {
   isMultiSelectMode = !isMultiSelectMode;
-  btn.textContent = "多選：" + (isMultiSelectMode ? "開" : "關");
+  e.target.textContent = "多選：" + (isMultiSelectMode ? "開" : "關");
   showToast(isMultiSelectMode ? "開啟多選" : "關閉多選");
+});
+
+let isClearedHidden = false;
+document.getElementById("toggleClearedHiddenBtn").addEventListener("click", e => {
+  const root = document.body;
+  isClearedHidden = !isClearedHidden;
+
+  root.classList.toggle("hide-cleared", isClearedHidden);
+  e.target.textContent = isClearedHidden ? "已通關：隱藏" : "已通關：顯示";
+  showToast(isClearedHidden ? "隱藏已通關" : "顯示已通關");
 });
 
 function showToast(message) {
@@ -583,6 +592,7 @@ function init() {
   canvases.forEach(canvas => {
     const imgs = canvas.querySelectorAll("img");
     imgs.forEach(img => {
+      img.setAttribute("draggable", true);
       const palette = getPaletteByImg(img);
       if (palette) palette.appendChild(img);
     });
@@ -610,30 +620,39 @@ function dropToCanvas(event) {
   if (!draggedElement) return;
 
   const canvas = event.currentTarget;
+  const isDraggingStage = draggedElement.classList.contains('stage');
+  const existingStage = canvas.querySelector('img.stage');
+
+  // 如果是要放 stage 且已有 stage，直接跳出
+  if (isDraggingStage && existingStage) {
+    showToast("這個區塊已經有關卡圖片了！");
+    draggedElement = null;
+    dragSource = null;
+    return;
+  }
+
   if (dragSource && dragSource !== canvas) {
-    // 判斷 draggedElement 的 class
     if (draggedElement.classList.contains('unit')) {
-      // 拖入的是 unit，放到 unit-group
       const unitGroup = canvas.querySelector('.unit-group');
       const selectedUnits = document.querySelectorAll('.unit.selected');
       const draggedIsSelected = Array.from(selectedUnits).includes(draggedElement);
-      const fragment = document.createDocumentFragment(); // 建立虛擬容器
+      const fragment = document.createDocumentFragment();
+
       if (selectedUnits.length > 1 && draggedIsSelected) {
-        selectedUnits.forEach(el => {
-          fragment.appendChild(el);       // 加入 fragment
-        });
+        selectedUnits.forEach(el => fragment.appendChild(el));
         unitGroup.appendChild(fragment);
       } else {
         unitGroup.appendChild(draggedElement);
-      }  
+      }
     }
-    else if (draggedElement.classList.contains('stage')) {
-      // 拖入的是 stage，直接放到 canvas-block (也就是 canvas 自己)
-      canvas.insertBefore(draggedElement, canvas.firstChild);
+    else if (isDraggingStage) {
+      canvas.querySelector('.stage-wrapper').appendChild(draggedElement);
     }
+
     updateTabCounts();
     saveState();
   }
+
   draggedElement = null;
   dragSource = null;
 }
@@ -741,7 +760,7 @@ function getPaletteByImg(img) {
   return null;
 }
 
-function getDelBtn (wrapper, canvas) {
+function getDelBtn(wrapper, canvas) {
   const delBtn = document.createElement("button");
   delBtn.textContent = "✖";
   delBtn.title = "刪除此關卡區域";
@@ -764,6 +783,7 @@ function getDelBtn (wrapper, canvas) {
       imgs.forEach(img => {
         const palette = getPaletteByImg(img);
         if (palette) palette.appendChild(img);
+        img.setAttribute("draggable", true); // ✅ 重新開放拖曳圖片
       });
       wrapper.removeChild(canvas);
       updateTabCounts();
@@ -771,6 +791,84 @@ function getDelBtn (wrapper, canvas) {
     }
   });
   return delBtn;
+}
+
+function getClearBtn(canvas) {
+  const btn = document.createElement("button");
+  btn.textContent = "✔";
+  btn.title = "標記為已通關";
+  btn.style.position = "absolute";
+  btn.style.top = "5px";
+  btn.style.right = "35px";
+  btn.style.background = "rgba(0, 128, 0, 0.7)";
+  btn.style.border = "none";
+  btn.style.color = "white";
+  btn.style.borderRadius = "50%";
+  btn.style.width = "24px";
+  btn.style.height = "24px";
+  btn.style.cursor = "pointer";
+  btn.style.zIndex = "10";
+
+  btn.addEventListener("click", e => {
+    e.stopPropagation();
+
+    const img = canvas.querySelector("img.stage");
+    if (img) {
+      markStageCleared(img);
+    }
+  });
+
+  return btn;
+}
+
+function markStageCleared(img) {
+  const wrapper = img.closest(".stage-wrapper");
+  const canvas = img.closest(".canvas");
+  if (!wrapper || !canvas) return;
+
+  const isNowCleared = !wrapper.classList.contains("cleared");
+
+  img.setAttribute("draggable", !isNowCleared);
+
+  if (isNowCleared) {
+    if (isClearedHidden) {
+      // 👉 先淡出
+      canvas.classList.add("fading-out");
+
+      setTimeout(() => {
+        wrapper.classList.add("cleared");           // ✅ 動畫後才加 cleared
+        canvas.classList.remove("fading-out");
+        saveState();                                // ✅ 動畫後儲存狀態
+      }, 500); // 和 CSS transition 一致
+    } else {
+      wrapper.classList.add("cleared");
+      saveState();
+    }
+  } else {
+    // 取消通關
+    wrapper.classList.remove("cleared");
+    canvas.classList.remove("fading-out");
+    img.setAttribute("draggable", true);
+    saveState();
+  }
+}
+
+function clearAllClearedStages() {
+  const confirmed = confirm("確定要取消所有通關標記嗎？");
+  if (!confirmed) return;
+
+  const clearedWrappers = document.querySelectorAll(".stage-wrapper.cleared");
+  clearedWrappers.forEach(wrapper => {
+    wrapper.classList.remove("cleared");
+
+    const img = wrapper.querySelector("img.stage");
+    if (img) {
+      img.setAttribute("draggable", true);
+    }
+  });
+
+  saveState(); // 更新 localStorage
+  showToast?.("已取消所有通關標記");
 }
 
 document.getElementById('canvas-wrapper').addEventListener('click', function (e) {
@@ -798,6 +896,15 @@ function addCanvas() {
   // 刪除按鈕
   const delBtn = getDelBtn(wrapper, newCanvas);
   newCanvas.appendChild(delBtn);
+  
+  // 新增✔通關按鈕
+  const clearBtn = getClearBtn(newCanvas);
+  newCanvas.appendChild(clearBtn);
+  
+  
+  const stageWrapper = document.createElement("div");
+  stageWrapper.className = "stage-wrapper";
+  newCanvas.appendChild(stageWrapper);
 
   // 內容容器
   const unitGroup = document.createElement("div");
@@ -820,13 +927,11 @@ function addCanvas() {
 
   saveState();
 }
-
 function collectAppState() {
   const wrapper = document.getElementById("canvas-wrapper");
   const disablePalette = document.getElementById("disable-units-container");
 
   const data = {
-    version: "v3",
     canvasZones: [],
     disabledUnits: {},
     unitFormIndexes: {}
@@ -834,16 +939,19 @@ function collectAppState() {
 
   // 收集 canvas 區塊資料
   wrapper.querySelectorAll(".canvas").forEach(zone => {
-    const stageImgs = Array.from(zone.querySelectorAll("img.stage"));
+    const img = zone.querySelector("img.stage"); // 直接取第一個 stage
     const unitImgs = Array.from(zone.querySelectorAll("img.unit"));
 
+    const stageData = img ? {
+      id: img.dataset.id,
+      title: img.title,
+      isCleared: img.closest(".stage-wrapper")?.classList.contains("cleared") || false
+    } : null;
+
     const zoneData = {
-      stages: stageImgs.map(img => ({
-        id: img.dataset.id || null,
-        title: img.title
-      })),
+      stage: stageData,  // 改用單一物件
       units: unitImgs.map(img => ({
-        id: img.dataset.id || null,
+        id: img.dataset.id,
         name: img.dataset.name
       }))
     };
@@ -923,17 +1031,30 @@ function loadState() {
 
       const delBtn = getDelBtn(wrapper, canvas);
       canvas.appendChild(delBtn);
+      
+      // 新增✔通關按鈕
+      const clearBtn = getClearBtn(canvas);
+      canvas.appendChild(clearBtn);
 
       // 搬移 stage 單位
-      zoneDatas.stages.forEach(stage => {
-        const img = document.querySelector(`img.stage[data-id="${stage.id}"]`);
-        if (img) canvas.appendChild(img); // 搬進 canvas
-      });
-
+      const stageWrapper = document.createElement("div");
+      stageWrapper.className = "stage-wrapper";
+      canvas.appendChild(stageWrapper);
+      // 兼容新舊資料結構
+      const stageData = zoneDatas.stage || (zoneDatas.stages ? zoneDatas.stages[0] : null);
+      if (stageData) {
+        const imgStage = document.querySelector(`img.stage[data-id="${stageData.id}"]`);
+        if (imgStage) stageWrapper.appendChild(imgStage);
+        if (stageData.isCleared) {
+          stageWrapper.classList.add('cleared');
+          imgStage.setAttribute('draggable', false);
+        }
+      }
+      
+      // 搬移 cat 單位
       const unitGroup = document.createElement("div");
       unitGroup.className = "unit-group";
       canvas.appendChild(unitGroup);
-      // 搬移 cat 單位
       zoneDatas.units.forEach(unit => {
         const img = document.querySelector(`img.unit[data-id="${unit.id}"]`);
         if (img) unitGroup.appendChild(img);
@@ -956,8 +1077,8 @@ function loadState() {
     });
   
     updateTabCounts();
-  } catch {
-    console.warn("載入失敗");
+  } catch (e) {
+    console.warn("載入失敗", e);
   }
 }
 
@@ -965,7 +1086,7 @@ document.getElementById("importFile").addEventListener("change", e => {
   const file = e.target.files[0];
   if (!file) return;
   const reader = new FileReader();
-  reader.onload = function(evt) {
+  reader.onload = function (evt) {
     try {
       init();
       const data = JSON.parse(evt.target.result);
@@ -1148,7 +1269,7 @@ function searchUnits() {
   if (currentIndex !== -1) {
     highlightUnit(resultSet[currentIndex]);
   } else {
-  document.querySelector('#search-results').textContent = "";
+    document.querySelector('#search-results').textContent = "";
   }
 }
 
@@ -1179,7 +1300,9 @@ function highlightUnit(id) {
     document.querySelectorAll('.unit.selected').forEach(el => el.classList.remove('selected'));
     img.classList.add("selected");
     setTimeout(() => img.classList.remove("highlight"), 1000);
-    showTippyWhenVisible(img);
+    const canvas = img.closest(".canvas");
+    const isHidden = canvas && canvas.offsetParent === null;
+    if (!isHidden) showTippyWhenVisible(img);
 
     document.querySelector('#search-results').textContent = `${currentIndex + 1}`;
   } else {

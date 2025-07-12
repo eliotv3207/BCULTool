@@ -174,7 +174,9 @@
           </div>
         </div>
       </div>
-      <div class="canvas-wrapper" id="canvas-wrapper"></div>
+      <div class="canvas-outer">
+        <div class="canvas-wrapper" id="canvas-wrapper"></div>
+      </div>
       <div class="tool-panel">
         <div class="tool-buttons">
           <div class="tool-group">
@@ -225,85 +227,85 @@
           <button class="filter-btn" data-rarity="5">傳說稀有</button>
         </div>
         <div class="filters-group traits-group">
-          <button class="icon-btn trait-red"        title="紅色敵人"      data-trait="TB_RED"></button>
-          <button class="icon-btn trait-float"      title="飄浮敵人"      data-trait="TB_FLOAT"></button>
-          <button class="icon-btn trait-black"      title="黑色敵人"      data-trait="TB_BLACK"></button>
-          <button class="icon-btn trait-metal"      title="鋼鐵敵人"      data-trait="TB_METAL"></button>
-          <button class="icon-btn trait-angel"      title="天使敵人"      data-trait="TB_ANGEL"></button>
-          <button class="icon-btn trait-alien"      title="異星戰士"      data-trait="TB_ALIEN"></button>
-          <button class="icon-btn trait-zombie"     title="不死生物"      data-trait="TB_ZOMBIE"></button>
-          <button class="icon-btn trait-relic"      title="古代種"        data-trait="TB_RELIC"></button>
-          <button class="icon-btn trait-traitless"  title="無屬性敵人"    data-trait="TB_WHITE"></button>
-          <button class="icon-btn trait-aku"        title="惡魔"          data-trait="TB_DEMON"></button>
+          <button class="icon-btn" title="紅色敵人"   data-trait="TB_RED">    <span class="filter-icon trait-red"></span></button>
+          <button class="icon-btn" title="飄浮敵人"   data-trait="TB_FLOAT">  <span class="filter-icon trait-float"></span></button>
+          <button class="icon-btn" title="黑色敵人"   data-trait="TB_BLACK">  <span class="filter-icon trait-black"></span></button>
+          <button class="icon-btn" title="鋼鐵敵人"   data-trait="TB_METAL">  <span class="filter-icon trait-metal"></span></button>
+          <button class="icon-btn" title="天使敵人"   data-trait="TB_ANGEL">  <span class="filter-icon trait-angel"></span></button>
+          <button class="icon-btn" title="異星戰士"   data-trait="TB_ALIEN">  <span class="filter-icon trait-alien"></span></button>
+          <button class="icon-btn" title="不死生物"   data-trait="TB_ZOMBIE"> <span class="filter-icon trait-zombie"></span></button>
+          <button class="icon-btn" title="古代種"     data-trait="TB_RELIC">  <span class="filter-icon trait-relic"></span></button>
+          <button class="icon-btn" title="無屬性敵人" data-trait="TB_WHITE">  <span class="filter-icon trait-traitless"></span></button>
+          <button class="icon-btn" title="惡魔"       data-trait="TB_DEMON">  <span class="filter-icon trait-aku"></span></button>
         </div>
         <div class="filters-group effects-group">
-          <button class="icon-btn effect-weaken"         title="攻擊力下降"     data-effect="AB_WEAK"></button>
-          <button class="icon-btn effect-freeze"         title="使動作停止"     data-effect="AB_STOP"></button>
-          <button class="icon-btn effect-slow"           title="使動作變慢"     data-effect="AB_SLOW"></button>
-          <button class="icon-btn effect-attacks-only"   title="只能攻擊"       data-effect="AB_ONLY"></button>
-          <button class="icon-btn effect-strong-against" title="善於攻擊"       data-effect="AB_GOOD"></button>
-          <button class="icon-btn effect-resistant"      title="很耐打"         data-effect="AB_RESIST"></button>
-          <button class="icon-btn effect-insanely-tough" title="超級耐打"       data-effect="AB_RESISTS"></button>
-          <button class="icon-btn effect-massive-damage" title="超大傷害"       data-effect="AB_MASSIVE"></button>
-          <button class="icon-btn effect-insane-damage"  title="極度傷害"       data-effect="AB_MASSIVES"></button>
-          <button class="icon-btn effect-knockback"      title="打飛敵人"       data-effect="AB_KB"></button>
-          <button class="icon-btn effect-warp"           title="傳送"           data-effect="AB_WARP"></button>
-          <button class="icon-btn effect-curse"          title="詛咒"           data-effect="AB_CURSE"></button>
-          <button class="icon-btn effect-dodge-attack"   title="攻擊無效"       data-effect="AB_IMUATK"></button>
+          <button class="icon-btn" title="攻擊力下降" data-effect="AB_WEAK">     <span class="filter-icon effect-weaken"></span></button>
+          <button class="icon-btn" title="使動作停止" data-effect="AB_STOP">     <span class="filter-icon effect-freeze"></span></button>
+          <button class="icon-btn" title="使動作變慢" data-effect="AB_SLOW">     <span class="filter-icon effect-slow"></span></button>
+          <button class="icon-btn" title="只能攻擊"   data-effect="AB_ONLY">     <span class="filter-icon effect-attacks-only"></span></button>
+          <button class="icon-btn" title="善於攻擊"   data-effect="AB_GOOD">     <span class="filter-icon effect-strong-against"></span></button>
+          <button class="icon-btn" title="很耐打"     data-effect="AB_RESIST">   <span class="filter-icon effect-resistant"></span></button>
+          <button class="icon-btn" title="超級耐打"   data-effect="AB_RESISTS">  <span class="filter-icon effect-insanely-tough"></span></button>
+          <button class="icon-btn" title="超大傷害"   data-effect="AB_MASSIVE">  <span class="filter-icon effect-massive-damage"></span></button>
+          <button class="icon-btn" title="極度傷害"   data-effect="AB_MASSIVES"> <span class="filter-icon effect-insane-damage"></span></button>
+          <button class="icon-btn" title="打飛敵人"   data-effect="AB_KB">       <span class="filter-icon effect-knockback"></span></button>
+          <button class="icon-btn" title="傳送"       data-effect="AB_WARP">     <span class="filter-icon effect-warp"></span></button>
+          <button class="icon-btn" title="詛咒"       data-effect="AB_CURSE">    <span class="filter-icon effect-curse"></span></button>
+          <button class="icon-btn" title="攻擊無效"   data-effect="AB_IMUATK">   <span class="filter-icon effect-dodge-attack"></span></button>
         </div>
         <div class="filters-group abilities-group">
-          <button class="icon-btn ability-strengthen"         title="攻擊力上升"         data-ability="AB_STRENGTHEN"></button>
-          <button class="icon-btn ability-survive"            title="死前存活"           data-ability="AB_LETHAL"></button>
-          <button class="icon-btn ability-base-destroyer"     title="善於攻城"           data-ability="AB_ATKBASE"></button>
-          <button class="icon-btn ability-critical"           title="會心一擊"           data-ability="AB_CRIT"></button>
-          <button class="icon-btn ability-zombie-killer"      title="終結不死"           data-ability="AB_ZKILL"></button>
-          <button class="icon-btn ability-soulstrike"         title="靈魂攻擊"           data-ability="AB_CKILL"></button>
-          <button class="icon-btn ability-barrier-breaker"    title="破壞護盾"           data-ability="AB_BREAK"></button>
-          <button class="icon-btn ability-shield-piercing"    title="破壞惡魔盾"         data-ability="AB_SHIELDBREAK"></button>
-          <button class="icon-btn ability-savage-blow"        title="渾身一擊"           data-ability="AB_S"></button>
-          <button class="icon-btn ability-extra-money"        title="得到很多金錢"       data-ability="AB_BOUNTY"></button>
-          <button class="icon-btn ability-metal"              title="鋼鐵特性"           data-ability="AB_METALIC"></button>
-          <button class="icon-btn ability-mini-wave"          title="小波動"             data-ability="AB_MINIWAVE"></button>
-          <button class="icon-btn ability-wave"               title="波動"               data-ability="AB_WAVE"></button>
-          <button class="icon-btn ability-mini-surge"         title="小烈波"             data-ability="AB_MINISURGE"></button>
-          <button class="icon-btn ability-surge"              title="烈波攻擊"           data-ability="AB_SURGE"></button>
-          <button class="icon-btn ability-wave-shield"        title="波動滅止"           data-ability="AB_WAVES"></button>
-          <button class="icon-btn ability-colossus-slayer"    title="超生命體特效"       data-ability="AB_BAIL"></button>
-          <button class="icon-btn ability-behemoth-slayer"    title="超獸特效"           data-ability="AB_BSTHUNT"></button>
-          <button class="icon-btn ability-witch-killer"       title="終結魔女"           data-ability="AB_WKILL"></button>
-          <button class="icon-btn ability-eva-angel-killer"   title="終結使徒"           data-ability="AB_EKILL"></button>
-          <button class="icon-btn ability-burrow"             title="鑽地"               data-ability="AB_BURROW"></button>
-          <button class="icon-btn ability-revive"             title="復活"               data-ability="AB_REVIVE"></button>
-          <button class="icon-btn ability-toxic"              title="毒擊"               data-ability="AB_POIATK"></button>
-          <button class="icon-btn ability-kamikaze"           title="一次攻擊"           data-ability="AB_SUICIDE"></button>
-          <button class="icon-btn ability-barrier"            title="護盾"               data-ability="AB_BARRIER"></button>
-          <button class="icon-btn ability-shield"             title="惡魔盾"             data-ability="AB_DSHIELD"></button>
-          <button class="icon-btn ability-counter-surge"      title="烈波反擊"           data-ability="AB_COUNTER"></button>
-          <button class="icon-btn ability-death-surge"        title="遺留烈波"           data-ability="AB_DEATHSURGE"></button>
-          <button class="icon-btn ability-sage-slayer"        title="超賢者特效"         data-ability="AB_SAGE"></button>
-          <button class="icon-btn ability-conjure"            title="召喚"               data-ability="AB_SUMMON"></button>
-          <button class="icon-btn ability-metal-killer"       title="鋼鐵殺手"           data-ability="AB_MK"></button>
-          <button class="icon-btn ability-explosion"          title="爆波"               data-ability="AB_EXPLOSION"></button>
+          <button class="icon-btn" title="攻擊力上升"   data-ability="AB_STRENGTHEN">  <span class="filter-icon ability-strengthen"></span></button>
+          <button class="icon-btn" title="死前存活"     data-ability="AB_LETHAL">      <span class="filter-icon ability-survive"></span></button>
+          <button class="icon-btn" title="善於攻城"     data-ability="AB_ATKBASE">     <span class="filter-icon ability-base-destroyer"></span></button>
+          <button class="icon-btn" title="會心一擊"     data-ability="AB_CRIT">        <span class="filter-icon ability-critical"></span></button>
+          <button class="icon-btn" title="終結不死"     data-ability="AB_ZKILL">       <span class="filter-icon ability-zombie-killer"></span></button>
+          <button class="icon-btn" title="靈魂攻擊"     data-ability="AB_CKILL">       <span class="filter-icon ability-soulstrike"></span></button>
+          <button class="icon-btn" title="破壞護盾"     data-ability="AB_BREAK">       <span class="filter-icon ability-barrier-breaker"></span></button>
+          <button class="icon-btn" title="破壞惡魔盾"   data-ability="AB_SHIELDBREAK"> <span class="filter-icon ability-shield-piercing"></span></button>
+          <button class="icon-btn" title="渾身一擊"     data-ability="AB_S">           <span class="filter-icon ability-savage-blow"></span></button>
+          <button class="icon-btn" title="得到很多金錢" data-ability="AB_BOUNTY">      <span class="filter-icon ability-extra-money"></span></button>
+          <button class="icon-btn" title="鋼鐵特性"     data-ability="AB_METALIC">     <span class="filter-icon ability-metal"></span></button>
+          <button class="icon-btn" title="小波動"       data-ability="AB_MINIWAVE">    <span class="filter-icon ability-mini-wave"></span></button>
+          <button class="icon-btn" title="波動"         data-ability="AB_WAVE">        <span class="filter-icon ability-wave"></span></button>
+          <button class="icon-btn" title="小烈波"       data-ability="AB_MINISURGE">   <span class="filter-icon ability-mini-surge"></span></button>
+          <button class="icon-btn" title="烈波攻擊"     data-ability="AB_SURGE">       <span class="filter-icon ability-surge"></span></button>
+          <button class="icon-btn" title="波動滅止"     data-ability="AB_WAVES">       <span class="filter-icon ability-wave-shield"></span></button>
+          <button class="icon-btn" title="超生命體特效" data-ability="AB_BAIL">        <span class="filter-icon ability-colossus-slayer"></span></button>
+          <button class="icon-btn" title="超獸特效"     data-ability="AB_BSTHUNT">     <span class="filter-icon ability-behemoth-slayer"></span></button>
+          <button class="icon-btn" title="終結魔女"     data-ability="AB_WKILL">       <span class="filter-icon ability-witch-killer"></span></button>
+          <button class="icon-btn" title="終結使徒"     data-ability="AB_EKILL">       <span class="filter-icon ability-eva-angel-killer"></span></button>
+          <button class="icon-btn" title="鑽地"         data-ability="AB_BURROW">      <span class="filter-icon ability-burrow"></span></button>
+          <button class="icon-btn" title="復活"         data-ability="AB_REVIVE">      <span class="filter-icon ability-revive"></span></button>
+          <button class="icon-btn" title="毒擊"         data-ability="AB_POIATK">      <span class="filter-icon ability-toxic"></span></button>
+          <button class="icon-btn" title="一次攻擊"     data-ability="AB_SUICIDE">     <span class="filter-icon ability-kamikaze"></span></button>
+          <button class="icon-btn" title="護盾"         data-ability="AB_BARRIER">     <span class="filter-icon ability-barrier"></span></button>
+          <button class="icon-btn" title="惡魔盾"       data-ability="AB_DSHIELD">     <span class="filter-icon ability-shield"></span></button>
+          <button class="icon-btn" title="烈波反擊"     data-ability="AB_COUNTER">     <span class="filter-icon ability-counter-surge"></span></button>
+          <button class="icon-btn" title="遺留烈波"     data-ability="AB_DEATHSURGE">  <span class="filter-icon ability-death-surge"></span></button>
+          <button class="icon-btn" title="超賢者特效"   data-ability="AB_SAGE">        <span class="filter-icon ability-sage-slayer"></span></button>
+          <button class="icon-btn" title="召喚"         data-ability="AB_SUMMON">      <span class="filter-icon ability-conjure"></span></button>
+          <button class="icon-btn" title="鋼鐵殺手"     data-ability="AB_MK">          <span class="filter-icon ability-metal-killer"></span></button>
+          <button class="icon-btn" title="爆波"         data-ability="AB_EXPLOSION">   <span class="filter-icon ability-explosion"></span></button>
         </div>
         <div class="filters-group attack-types-group">
-          <button class="icon-btn attack-single"        title="單體攻擊"        data-attack="ATK_SINGLE"></button>
-          <button class="icon-btn attack-area"          title="範圍攻擊"        data-attack="ATK_RANGE"></button>
-          <button class="icon-btn attack-long-distance" title="遠距攻擊"        data-attack="ATK_LD"></button>
-          <button class="icon-btn attack-omni"          title="全方位攻擊"      data-attack="ATK_OMNI"></button>
-          <button class="icon-btn attack-kb-revenge"    title="擊退反擊"        data-attack="ATK_KB_REVENGE"></button>
+          <button class="icon-btn" title="單體攻擊"   data-attack="ATK_SINGLE">     <span class="filter-icon attack-single"></span></button>
+          <button class="icon-btn" title="範圍攻擊"   data-attack="ATK_RANGE">      <span class="filter-icon attack-area"></span></button>
+          <button class="icon-btn" title="遠距攻擊"   data-attack="ATK_LD">         <span class="filter-icon attack-long-distance"></span></button>
+          <button class="icon-btn" title="全方位攻擊" data-attack="ATK_OMNI">       <span class="filter-icon attack-omni"></span></button>
+          <button class="icon-btn" title="擊退反擊"   data-attack="ATK_KB_REVENGE"> <span class="filter-icon attack-kb-revenge"></span></button>
         </div>
         <div class="filters-group immunities-group">
-          <button class="icon-btn immunity-wave"        title="波動傷害無效"     data-immunity="IMU_WAVE"></button>
-          <button class="icon-btn immunity-stop"        title="動作停止無效"     data-immunity="IMU_STOP"></button>
-          <button class="icon-btn immunity-slow"        title="動作變慢無效"     data-immunity="IMU_SLOW"></button>
-          <button class="icon-btn immunity-kb"          title="打飛敵人無效"     data-immunity="IMU_KB"></button>
-          <button class="icon-btn immunity-surge"       title="烈波傷害無效"     data-immunity="IMU_SURGE"></button>
-          <button class="icon-btn immunity-weaken"      title="攻擊力下降無效"   data-immunity="IMU_WEAK"></button>
-          <button class="icon-btn immunity-warp"        title="傳送無效"         data-immunity="IMU_WARP"></button>
-          <button class="icon-btn immunity-curse"       title="古代詛咒無效"     data-immunity="IMU_CURSE"></button>
-          <button class="icon-btn immunity-toxic"       title="毒擊傷害無效"     data-immunity="IMU_TOXIC"></button>
-          <button class="icon-btn immunity-bosswave"    title="魔王震波無效"     data-immunity="IMU_BOSSWAVE"></button>
-          <button class="icon-btn immunity-explosion"   title="爆波傷害無效"     data-immunity="IMU_EXPLOSION"></button>
+          <button class="icon-btn" title="波動傷害無效"   data-immunity="IMU_WAVE">      <span class="filter-icon immunity-wave"></span></button>
+          <button class="icon-btn" title="動作停止無效"   data-immunity="IMU_STOP">      <span class="filter-icon immunity-stop"></span></button>
+          <button class="icon-btn" title="動作變慢無效"   data-immunity="IMU_SLOW">      <span class="filter-icon immunity-slow"></span></button>
+          <button class="icon-btn" title="打飛敵人無效"   data-immunity="IMU_KB">        <span class="filter-icon immunity-kb"></span></button>
+          <button class="icon-btn" title="烈波傷害無效"   data-immunity="IMU_SURGE">     <span class="filter-icon immunity-surge"></span></button>
+          <button class="icon-btn" title="攻擊力下降無效" data-immunity="IMU_WEAK">      <span class="filter-icon immunity-weaken"></span></button>
+          <button class="icon-btn" title="傳送無效"       data-immunity="IMU_WARP">      <span class="filter-icon immunity-warp"></span></button>
+          <button class="icon-btn" title="古代詛咒無效"   data-immunity="IMU_CURSE">     <span class="filter-icon immunity-curse"></span></button>
+          <button class="icon-btn" title="毒擊傷害無效"   data-immunity="IMU_TOXIC">     <span class="filter-icon immunity-toxic"></span></button>
+          <button class="icon-btn" title="魔王震波無效"   data-immunity="IMU_BOSSWAVE">  <span class="filter-icon immunity-bosswave"></span></button>
+          <button class="icon-btn" title="爆波傷害無效"   data-immunity="IMU_EXPLOSION"> <span class="filter-icon immunity-explosion"></span></button>
         </div>
       </div>
     </div>

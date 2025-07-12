@@ -764,17 +764,7 @@ function getDelBtn(wrapper, canvas) {
   const delBtn = document.createElement("button");
   delBtn.textContent = "✖";
   delBtn.title = "刪除此關卡區域";
-  delBtn.style.position = "absolute";
-  delBtn.style.top = "5px";
-  delBtn.style.right = "5px";
-  delBtn.style.background = "rgba(255, 0, 0, 0.7)";
-  delBtn.style.border = "none";
-  delBtn.style.color = "white";
-  delBtn.style.borderRadius = "50%";
-  delBtn.style.width = "24px";
-  delBtn.style.height = "24px";
-  delBtn.style.cursor = "pointer";
-  delBtn.style.zIndex = "10";
+  delBtn.classList.add("stage-btn", "del-btn");
 
   delBtn.addEventListener("click", e => {
     e.stopPropagation();
@@ -783,13 +773,14 @@ function getDelBtn(wrapper, canvas) {
       imgs.forEach(img => {
         const palette = getPaletteByImg(img);
         if (palette) palette.appendChild(img);
-        img.setAttribute("draggable", true); // ✅ 重新開放拖曳圖片
+        img.setAttribute("draggable", true);
       });
       wrapper.removeChild(canvas);
       updateTabCounts();
       saveState();
     }
   });
+
   return delBtn;
 }
 
@@ -797,17 +788,7 @@ function getClearBtn(canvas) {
   const btn = document.createElement("button");
   btn.textContent = "✔";
   btn.title = "標記為已通關";
-  btn.style.position = "absolute";
-  btn.style.top = "5px";
-  btn.style.right = "35px";
-  btn.style.background = "rgba(0, 128, 0, 0.7)";
-  btn.style.border = "none";
-  btn.style.color = "white";
-  btn.style.borderRadius = "50%";
-  btn.style.width = "24px";
-  btn.style.height = "24px";
-  btn.style.cursor = "pointer";
-  btn.style.zIndex = "10";
+  btn.classList.add("stage-btn", "clear-btn");
 
   btn.addEventListener("click", e => {
     e.stopPropagation();

@@ -367,6 +367,7 @@ function generateTooltipContent(unit) {
   const attackType = getBitflagIcons(form.attack_type, ATTACK_TYPES, ATTACK_TYPE_INFO);
   return `
     <div class="tooltip-content" data-id="${unit.id}">
+      <div class="rarity-row">${rarityMap[unit.rarity]}</div>
       <div style="text-align: center;">${form.name_tw}(TW)</div>
       <div style="text-align: center;">${form.name_jp}(JP)</div>
       <div style="text-align: center;">${form.description.replaceAll("|", "<BR>")}</div>

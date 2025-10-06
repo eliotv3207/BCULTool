@@ -454,6 +454,11 @@ button:active {
   justify-content: center;  /* 水平置中 */
   gap: 0.1em;  /*圖文間距 */
 }
+.rarity-row {
+  border-bottom: 2px solid #ccc;
+  padding: 2px;
+  margin: 2px;
+}
 .icon {
   display: inline-block;
   width: 24px;

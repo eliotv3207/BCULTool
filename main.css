@@ -264,6 +264,8 @@ body {
   text-align: center;
   width: auto;
   align-self: start;
+  min-width: 28px;
+  box-sizing: border-box;
 }
 .custom-btn:hover {
   background-color: #43A047;              /* 比原色亮一階的綠色 */

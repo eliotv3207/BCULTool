@@ -80,6 +80,13 @@ function parseTSV(text) {
   });
 }
 
+let isTooltipVisible = true;
+document.getElementById("toggleTooltipVisibleBtn").addEventListener("click", e => {
+  isTooltipVisible = !isTooltipVisible;
+  e.target.textContent = "簡介：" + (isTooltipVisible ? "開" : "關");
+  showToast(isTooltipVisible ? "開啟簡介" : "關閉簡介");
+});
+
 async function main() {
   const cats = await fetchData('https://raw.githubusercontent.com/battlecatsinfo/battlecatsinfo.github.io/master/data/cat.tsv');
   const catstats = await fetchData('https://raw.githubusercontent.com/battlecatsinfo/battlecatsinfo.github.io/master/data/catstat.tsv');
@@ -118,6 +125,55 @@ async function main() {
         theme: 'my-light',
         animation: 'scale',
         interactive: true,
+        onShow(instance) {
+          const contentEl = instance.popper.querySelector('.tooltip-content');
+          if (!isTooltipVisible) {
+            const nameTwEl = instance.popper.querySelector('.tooltip-content .name-tw');
+            if (contentEl) {
+              // 1. 先把內容區塊裡的所有直接子元素隱藏
+              Array.from(contentEl.children).forEach(child => {
+                child.classList.add('hide');
+              });
+            }
+            if (nameTwEl) {
+              nameTwEl.classList.remove('hide');
+            }
+          }
+          else {
+            if (contentEl) {
+              Array.from(contentEl.children).forEach(child => {
+                child.classList.remove('hide');
+              });
+            }
+          }
+        },
+        onMount(instance) {
+          let canClose = false;
+          // 給它 150 毫秒的緩衝時間，讓畫面穩定、忽略一開始的彈出干擾
+          const timer = setTimeout(() => {
+            canClose = true;
+          }, 150);
+          const handleMouseMove = () => {
+            // 如果緩衝時間還沒過，直接跳過不理它
+            if (!canClose) return;
+            // 真正開始監聽滑鼠移動，只要一動就關閉
+            if (!isTooltipVisible) {instance.hide();}
+            img.removeEventListener('mousemove', handleMouseMove);
+          };
+
+          img.addEventListener('mousemove', handleMouseMove);
+
+          // 關閉時記得清掉計時器與監聽
+          instance._cleanupMouseMove = () => {
+            clearTimeout(timer);
+            img.removeEventListener('mousemove', handleMouseMove);
+          };
+        },
+        onHidden(instance) {
+          if (instance._cleanupMouseMove) {
+            instance._cleanupMouseMove();
+          }
+        },
         popperOptions: {
           modifiers: [{
             name: 'eventListeners',
@@ -368,8 +424,8 @@ function generateTooltipContent(unit) {
   return `
     <div class="tooltip-content" data-id="${unit.id}">
       <div class="rarity-row">${rarityMap[unit.rarity]}</div>
-      <div style="text-align: center;">${form.name_tw}(TW)</div>
-      <div style="text-align: center;">${form.name_jp}(JP)</div>
+      <div class="name-tw"style="text-align: center;">${form.name_tw}(TW)</div>
+      <div class="name-jp"style="text-align: center;">${form.name_jp}(JP)</div>
       <div style="text-align: center;">${form.description.replaceAll("|", "<BR>")}</div>
       <div>${getBitflagIcons(form.trait, TRAITS, TRAIT_INFO)}${arrow}${getAbilityIconsFromList(abilityIds, EFFECTS, EFFECT_INFO)}</div>
       ${immunity}
@@ -391,7 +447,7 @@ document.getElementById("toggleClearedHiddenBtn").addEventListener("click", e =>
   isClearedHidden = !isClearedHidden;
 
   root.classList.toggle("hide-cleared", isClearedHidden);
-  e.target.textContent = isClearedHidden ? "已通關：隱藏" : "已通關：顯示";
+  e.target.textContent = isClearedHidden ? "通關：隱藏" : "通關：顯示";
   showToast(isClearedHidden ? "隱藏已通關" : "顯示已通關");
 });
 
@@ -442,6 +498,7 @@ function switchForm(id) {
   });
   img.dataset.name = unit.forms[unit.form_index].name_tw;
   img._tippy.setContent(generateTooltipContent(unit));
+  img._tippy.hide();// 觸發 onShow()
   img._tippy.show();
   saveState();
 }
@@ -1158,6 +1215,9 @@ document.addEventListener('keydown', e => {
   else if (e.code  === 'KeyA') {
     add();
   }
+  else if (e.code  === 'KeyR') {
+    remove();
+  }
   else if (e.code  === 'Escape') {
     document.querySelectorAll('.unit.selected').forEach(el => el.classList.remove('selected'));
   }
@@ -1316,16 +1376,31 @@ function prev() {
 }
 
 function add() {
-  if (resultSet.length === 0) return;
-  const id = resultSet[currentIndex];
-  const img = document.querySelector(`#available-units-container img.unit[data-id="${id}"]`);
   const container = document.querySelector('.canvas.selected .unit-group');
-  if (img && container) {
+  if (!container) return;
+  const imgs = document.querySelectorAll('.unit.selected');
+  imgs.forEach(img => {
     container.appendChild(img);
-    img._tippy.hide();
-    updateTabCounts();
-    saveState();
-  }
+	if (img._tippy) {
+      img._tippy.hide();
+    }
+	img.classList.remove('selected');
+  });
+  updateTabCounts();
+  saveState();
+}
+
+function remove() {
+  const container = document.querySelector('.canvas.selected .unit-group');
+  if (!container) return;
+  const imgs = container.querySelectorAll('.unit.selected');
+  imgs.forEach(img => {
+	const palette = getPaletteByImg(img);
+	if (palette) palette.appendChild(img);
+	img.classList.remove('selected');
+  });
+  updateTabCounts();
+  saveState();
 }
 
 function query() {

@@ -454,6 +454,9 @@ button:active {
   justify-content: center;  /* 水平置中 */
   gap: 0.1em;  /*圖文間距 */
 }
+.tooltip-content .hide {
+  display: none;
+}
 .rarity-row {
   border-bottom: 2px solid #ccc;
   padding: 2px;

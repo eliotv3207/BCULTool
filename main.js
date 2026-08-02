@@ -124,6 +124,7 @@ async function main() {
         placement: 'top',
         theme: 'my-light',
         animation: 'scale',
+		delay: 200,
         interactive: true,
         onShow(instance) {
           const contentEl = instance.popper.querySelector('.tooltip-content');
